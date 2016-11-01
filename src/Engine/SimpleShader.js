@@ -70,9 +70,4 @@
    return this.mCompiledShader;  
  };
  
-     
-     
-     
-     
  
-
