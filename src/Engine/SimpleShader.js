@@ -7,7 +7,7 @@
     this.mCompiledShader = null;
     this.mShaderVertexPositionAttribute = null;
     this.mPixelColor = null;
-    
+    this.mModelTransform = null;
 
     var gl = gEngine.Core.getGL();
 
@@ -24,6 +24,7 @@
     
     this.mShaderVertexPositionAttribute = gl.getAttribLocation(this.mCompiledShader, "aSquareVertexPosition");
     this.mPixelColor = gl.getUniformLocation(this.mCompiledShader, "uPixelColor");
+    this.mModelTransform = gl.getUniformLocation(this.mCompiledShader, "uModelTransform");
     
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.getGLVertexRef());
     
@@ -64,6 +65,12 @@
     gl.useProgram(this.mCompiledShader);
     gl.enableVertexAttribArray(this.mShaderVertexPositionAttribute);
     gl.uniform4fv(this.mPixelColor, pixelColor);
+ };
+ 
+ SimpleShader.prototype.loadTransform = function(modelTransform) {
+     var gl = gEngine.Core.getGL();
+     //put modelTransform to the shader uniform transform operator
+     gl.uniformMatrix4fv(this.mModelTransform, false, modelTransform);
  };
 
  SimpleShader.prototype.getShader = function() {

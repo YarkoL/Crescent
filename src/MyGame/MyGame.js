@@ -15,9 +15,13 @@ function MyGame(canvasID) {
     
     gEngine.Core.clearCanvas([0, 0.8, 0, 1]);
     
-    this.mRedSq.draw();
-    this.mWhiteSq.draw();
+    var xform = mat4.create();
+    mat4.translate(xform, xform, vec3.fromValues(-0.25, 0.25, 0.0));
+    this.mRedSq.draw(xform);
     
+    mat4.identity(xform);
+    mat4.rotateZ(xform, xform, 60 * Math.PI / 180);
+    this.mWhiteSq.draw(xform);
 }
 
 
